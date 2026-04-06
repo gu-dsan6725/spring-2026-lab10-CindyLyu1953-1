@@ -31,7 +31,7 @@ from autoevals.llm import (
 )
 from braintrust import Eval
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import AsyncOpenAI, OpenAI
 
 
 # Configure logging
@@ -54,24 +54,62 @@ EVAL_JUDGE_MODEL = "claude-sonnet-4-6"
 ANTHROPIC_OPENAI_BASE_URL = "https://api.anthropic.com/v1/"
 
 
-def _create_judge_client() -> OpenAI:
+def _create_judge_clients() -> tuple[AsyncOpenAI, OpenAI]:
     """
-    Create an OpenAI-compatible client pointing at Anthropic's API.
+    Create OpenAI-compatible clients pointing at Anthropic's API.
 
-    Autoevals scorers use the OpenAI SDK interface. Anthropic provides
-    an OpenAI-compatible endpoint so we can use Claude as the judge model.
+    Braintrust runs LLM scorers via ``eval_async``, which calls autoevals
+    ``arun_cached_request`` and must ``await`` chat completions. A synchronous
+    ``OpenAI()`` client returns plain ``ChatCompletion`` objects and breaks with
+    ``TypeError: object ChatCompletion can't be used in 'await' expression``.
+
+    Autoevals ``ClosedQA.eval`` uses the sync ``run_cached_request`` path, so it
+    still needs a synchronous ``OpenAI`` client.
 
     Returns:
-        OpenAI client configured for Anthropic
+        (async_client for Factuality, sync_client for ClosedQA wrapper)
     """
     anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
     if not anthropic_api_key:
         raise ValueError("ANTHROPIC_API_KEY not set in environment")
 
-    return OpenAI(
-        api_key=anthropic_api_key,
-        base_url=ANTHROPIC_OPENAI_BASE_URL,
-    )
+    kwargs = {
+        "api_key": anthropic_api_key,
+        "base_url": ANTHROPIC_OPENAI_BASE_URL,
+    }
+    return AsyncOpenAI(**kwargs), OpenAI(**kwargs)
+
+
+def _make_closed_qa_scorer(model: str, client: OpenAI):
+    """
+    ClosedQA's Mustache template requires `criteria`, but Braintrust Eval only passes
+    input / output / expected / metadata. Without `criteria`, chevron prints
+    "Could not find key 'criteria'" and the scorer misbehaves.
+
+    This wrapper derives criteria from metadata or the expected reference string.
+    """
+    inner = ClosedQA(model=model, client=client)
+
+    def closed_qa_scorer(**kwargs: Any) -> Any:
+        user_input = str(kwargs["input"])
+        output = str(kwargs["output"])
+        expected = kwargs.get("expected")
+        metadata = kwargs.get("metadata")
+        crit: Optional[str] = None
+        if metadata:
+            crit = metadata.get("criteria")
+        if not crit and expected:
+            crit = (
+                "The submission should be substantively correct and align with this "
+                "reference answer:\n"
+                + str(expected)[:6000]
+            )
+        if not crit:
+            crit = "The submission should correctly and completely answer the task."
+        return inner.eval(output=output, expected=expected, input=user_input, criteria=crit)
+
+    closed_qa_scorer.__name__ = "ClosedQA"
+    return closed_qa_scorer
 
 
 def _load_dataset(
@@ -838,9 +876,8 @@ def main() -> None:
     # so that runtime metadata (tools_used, latency) is available to scorers
     task_fn, data_fn = _create_wrapped_task(dataset)
 
-    # Create OpenAI-compatible client pointing at Anthropic API
-    # so autoevals LLM-as-judge scorers use Claude Sonnet 4.6 instead of GPT-4o
-    judge_client = _create_judge_client()
+    # Async client for Factuality (Braintrust uses eval_async); sync client for ClosedQA (inner.eval).
+    judge_client_async, judge_client_sync = _create_judge_clients()
 
     # Define all scorers
     # Built-in autoevals (LLM-as-judge via Claude Sonnet 4.6)
@@ -853,8 +890,8 @@ def main() -> None:
     #   NoError: Does the response avoid error/failure indicators?
     #   ScopeAwareness: Does the agent decline out-of-scope requests?
     all_scorers = [
-        Factuality(model=EVAL_JUDGE_MODEL, client=judge_client),
-        ClosedQA(model=EVAL_JUDGE_MODEL, client=judge_client),
+        Factuality(model=EVAL_JUDGE_MODEL, client=judge_client_async),
+        _make_closed_qa_scorer(EVAL_JUDGE_MODEL, judge_client_sync),
         tool_selection_scorer,
         response_completeness_scorer,
         latency_scorer,
@@ -867,6 +904,9 @@ def main() -> None:
         "data": data_fn,
         "task": task_fn,
         "scores": all_scorers,
+        # Serialize eval tasks to avoid httpx AsyncClient teardown racing a closed event loop
+        # ("Task exception was never retrieved" / RuntimeError: Event loop is closed).
+        "max_concurrency": 1,
     }
 
     if args.experiment_name:
