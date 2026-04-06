@@ -1,5 +1,5 @@
 """
-Agent tools for search, weather, and directions.
+Agent tools for search, weather, directions, local time, and currency exchange.
 
 Each tool is a Strands @tool decorated function that the agent can invoke.
 Tools are kept in this separate module so they can be:
@@ -13,7 +13,10 @@ All tool log messages are prefixed with [Tool] for easy filtering in debug.log:
 
 import json
 import logging
+import re
 import time
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import requests
 from ddgs import DDGS
@@ -34,6 +37,38 @@ OSRM_BASE_URL = "https://router.project-osrm.org/route/v1/driving"
 OPEN_METEO_BASE_URL = "https://api.open-meteo.com/v1/forecast"
 NOMINATIM_USER_AGENT = "simple-agent-evals/1.0"
 HTTP_TIMEOUT_SECONDS = 10
+FRANKFURTER_LATEST_URL = "https://api.frankfurter.app/latest"
+
+# Lowercase city / region name -> IANA timezone id for get_current_time
+_CITY_TO_TIMEZONE: dict[str, str] = {
+    "tokyo": "Asia/Tokyo",
+    "shinjuku": "Asia/Tokyo",
+    "osaka": "Asia/Tokyo",
+    "kyoto": "Asia/Tokyo",
+    "london": "Europe/London",
+    "paris": "Europe/Paris",
+    "berlin": "Europe/Berlin",
+    "new york": "America/New_York",
+    "manhattan": "America/New_York",
+    "brooklyn": "America/New_York",
+    "los angeles": "America/Los_Angeles",
+    "chicago": "America/Chicago",
+    "denver": "America/Denver",
+    "miami": "America/New_York",
+    "seattle": "America/Los_Angeles",
+    "washington dc": "America/New_York",
+    "washington": "America/New_York",
+    "sydney": "Australia/Sydney",
+    "dubai": "Asia/Dubai",
+    "singapore": "Asia/Singapore",
+    "hong kong": "Asia/Hong_Kong",
+    "mumbai": "Asia/Kolkata",
+    "anchorage": "America/Anchorage",
+    "nashville": "America/Chicago",
+    "austin": "America/Chicago",
+    "boston": "America/New_York",
+    "san francisco": "America/Los_Angeles",
+}
 
 
 # ---------------------------------------------------------------------------
@@ -121,6 +156,32 @@ def _format_distance(
     """
     miles = distance_meters / 1609.34
     return f"{miles:.1f} miles"
+
+
+def _timezone_for_city(city: str) -> str:
+    """Map a user-provided city name to an IANA timezone identifier."""
+    key = city.strip().lower()
+    if key not in _CITY_TO_TIMEZONE:
+        raise ValueError(
+            f"Unknown city '{city}'. Use a major city name (e.g. Tokyo, London, New York)."
+        )
+    return _CITY_TO_TIMEZONE[key]
+
+
+def _format_utc_offset(dt: datetime) -> str:
+    """Format UTC offset like +09:00 from a timezone-aware datetime."""
+    z = dt.strftime("%z")
+    if z and len(z) >= 5:
+        return f"{z[:3]}:{z[3:]}"
+    offset = dt.utcoffset()
+    if offset is None:
+        return "+00:00"
+    secs = int(offset.total_seconds())
+    sign = "+" if secs >= 0 else "-"
+    secs = abs(secs)
+    h, rem = divmod(secs, 3600)
+    m = rem // 60
+    return f"{sign}{h:02d}:{m:02d}"
 
 
 # ---------------------------------------------------------------------------
@@ -281,4 +342,103 @@ def get_directions(
 
     except Exception as e:
         logger.error(f"[Tool] get_directions failed: {e}")
+        return json.dumps({"error": str(e)})
+
+
+@tool
+def get_current_time(city: str) -> str:
+    """
+    Get the current local date and time for a supported city using IANA timezones.
+    Use this when the user asks what time it is somewhere in the world.
+
+    Args:
+        city: City or region name (e.g. 'Tokyo', 'New York', 'London', 'Shinjuku')
+
+    Returns:
+        JSON string with local time, IANA timezone id, abbreviation (if available), and UTC offset
+    """
+    try:
+        logger.info(f"[Tool] get_current_time: city='{city}'")
+        tz_id = _timezone_for_city(city)
+        now = datetime.now(ZoneInfo(tz_id))
+        tz_abbr = now.strftime("%Z") or ""
+
+        payload = {
+            "city_query": city.strip(),
+            "iana_timezone": tz_id,
+            "local_time_iso": now.isoformat(),
+            "local_time_display": now.strftime("%Y-%m-%d %H:%M:%S"),
+            "timezone_abbreviation": tz_abbr,
+            "utc_offset": _format_utc_offset(now),
+        }
+        logger.info(
+            f"[Tool] get_current_time: {tz_id} -> {payload['local_time_display']} ({payload['utc_offset']})"
+        )
+        return json.dumps(payload, indent=2)
+
+    except ValueError as e:
+        logger.error(f"[Tool] get_current_time: {e}")
+        return json.dumps({"error": str(e)})
+    except Exception as e:
+        logger.error(f"[Tool] get_current_time failed: {e}")
+        return json.dumps({"error": str(e)})
+
+
+@tool
+def get_exchange_rate(
+    from_currency: str,
+    to_currency: str,
+    amount: float = 1.0,
+) -> str:
+    """
+    Get the latest foreign exchange rate using the Frankfurter API (no API key).
+    Use this when the user asks for currency conversion or exchange rates.
+
+    Args:
+        from_currency: ISO 4217 base currency code (e.g. 'USD', 'GBP')
+        to_currency: ISO 4217 quote currency code (e.g. 'EUR', 'JPY')
+        amount: Amount to convert in the base currency (default 1.0)
+
+    Returns:
+        JSON string with rate, converted amount, and rate date
+    """
+    try:
+        fc = from_currency.strip().upper()
+        tc = to_currency.strip().upper()
+        if not re.fullmatch(r"[A-Z]{3}", fc) or not re.fullmatch(r"[A-Z]{3}", tc):
+            raise ValueError("Currency codes must be 3-letter ISO 4217 (e.g. USD, EUR, JPY).")
+
+        logger.info(f"[Tool] get_exchange_rate: {amount} {fc} -> {tc}")
+
+        response = requests.get(
+            FRANKFURTER_LATEST_URL,
+            params={"from": fc, "to": tc},
+            timeout=HTTP_TIMEOUT_SECONDS,
+        )
+        response.raise_for_status()
+        data = response.json()
+
+        rates = data.get("rates") or {}
+        if tc not in rates:
+            raise ValueError(f"No exchange rate returned for {fc} -> {tc}.")
+
+        rate = float(rates[tc])
+        converted = float(amount) * rate
+
+        payload = {
+            "date": data.get("date"),
+            "from_currency": fc,
+            "to_currency": tc,
+            "amount": float(amount),
+            "exchange_rate": rate,
+            "converted_amount": round(converted, 6),
+        }
+        logger.info(f"[Tool] get_exchange_rate: 1 {fc} = {rate} {tc}; {amount} {fc} -> {converted}")
+        return json.dumps(payload, indent=2)
+
+    except ValueError as e:
+        logger.error(f"[Tool] get_exchange_rate: {e}")
+        return json.dumps({"error": str(e)})
+    except Exception as e:
+        logger.error(f"[Tool] get_exchange_rate failed: {e}")
         return json.dumps({"error": str(e)})

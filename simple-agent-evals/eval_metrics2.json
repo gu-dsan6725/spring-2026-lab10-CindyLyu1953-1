@@ -1,0 +1,200 @@
+{
+  "total_cases": 5,
+  "errors": 0,
+  "overall_scores": {
+    "ClosedQA": {
+      "average": 0.4,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 5
+    },
+    "Factuality": {
+      "average": 0.56,
+      "min": 0.4,
+      "max": 0.6,
+      "count": 5
+    },
+    "Latency": {
+      "average": 0.95,
+      "min": 0.75,
+      "max": 1.0,
+      "count": 5
+    },
+    "NoError": {
+      "average": 1.0,
+      "min": 1,
+      "max": 1,
+      "count": 5
+    },
+    "ResponseCompleteness": {
+      "average": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 1
+    },
+    "ScopeAwareness": {
+      "average": 0.8,
+      "min": 0,
+      "max": 1,
+      "count": 5
+    },
+    "ToolSelection": {
+      "average": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 5
+    }
+  },
+  "per_category": {
+    "currency": {
+      "ClosedQA": {
+        "average": 0.5,
+        "count": 2
+      },
+      "Factuality": {
+        "average": 0.6,
+        "count": 2
+      },
+      "Latency": {
+        "average": 1.0,
+        "count": 2
+      },
+      "NoError": {
+        "average": 1.0,
+        "count": 2
+      },
+      "ScopeAwareness": {
+        "average": 1.0,
+        "count": 2
+      },
+      "ToolSelection": {
+        "average": 1.0,
+        "count": 2
+      }
+    },
+    "multi_tool": {
+      "ClosedQA": {
+        "average": 0.0,
+        "count": 1
+      },
+      "Factuality": {
+        "average": 0.4,
+        "count": 1
+      },
+      "Latency": {
+        "average": 0.75,
+        "count": 1
+      },
+      "NoError": {
+        "average": 1.0,
+        "count": 1
+      },
+      "ResponseCompleteness": {
+        "average": 1.0,
+        "count": 1
+      },
+      "ScopeAwareness": {
+        "average": 0.0,
+        "count": 1
+      },
+      "ToolSelection": {
+        "average": 1.0,
+        "count": 1
+      }
+    },
+    "timezone": {
+      "ClosedQA": {
+        "average": 0.5,
+        "count": 2
+      },
+      "Factuality": {
+        "average": 0.6,
+        "count": 2
+      },
+      "Latency": {
+        "average": 1.0,
+        "count": 2
+      },
+      "NoError": {
+        "average": 1.0,
+        "count": 2
+      },
+      "ScopeAwareness": {
+        "average": 1.0,
+        "count": 2
+      },
+      "ToolSelection": {
+        "average": 1.0,
+        "count": 2
+      }
+    }
+  },
+  "per_case": [
+    {
+      "input": "What is the current local time and date in London, UK?",
+      "category": "timezone",
+      "scores": {
+        "Factuality": 0.6,
+        "ClosedQA": 1.0,
+        "ToolSelection": 1.0,
+        "Latency": 1.0,
+        "NoError": 1,
+        "ScopeAwareness": 1
+      },
+      "error": null
+    },
+    {
+      "input": "What time is it right now in Tokyo?",
+      "category": "timezone",
+      "scores": {
+        "Factuality": 0.6,
+        "ClosedQA": 0.0,
+        "ToolSelection": 1.0,
+        "Latency": 1.0,
+        "NoError": 1,
+        "ScopeAwareness": 1
+      },
+      "error": null
+    },
+    {
+      "input": "Convert 50 US dollars to Japanese yen using the current exchange rate.",
+      "category": "currency",
+      "scores": {
+        "Factuality": 0.6,
+        "ClosedQA": 0.0,
+        "ToolSelection": 1.0,
+        "Latency": 1.0,
+        "NoError": 1,
+        "ScopeAwareness": 1
+      },
+      "error": null
+    },
+    {
+      "input": "How many euros would I receive for 200 British pounds at today's exchange rate?",
+      "category": "currency",
+      "scores": {
+        "Factuality": 0.6,
+        "ClosedQA": 1.0,
+        "ToolSelection": 1.0,
+        "Latency": 1.0,
+        "NoError": 1,
+        "ScopeAwareness": 1
+      },
+      "error": null
+    },
+    {
+      "input": "I am planning a business trip from New York to Tokyo. How long is the flight route by driving to JFK first, what is the ",
+      "category": "multi_tool",
+      "scores": {
+        "Factuality": 0.4,
+        "ClosedQA": 0.0,
+        "ToolSelection": 1.0,
+        "ResponseCompleteness": 1.0,
+        "Latency": 0.75,
+        "NoError": 1,
+        "ScopeAwareness": 0
+      },
+      "error": null
+    }
+  ]
+}

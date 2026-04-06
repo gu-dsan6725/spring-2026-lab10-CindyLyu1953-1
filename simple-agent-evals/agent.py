@@ -1,5 +1,5 @@
 """
-Simple Strands Agent with DuckDuckGo Search, Weather, and Directions tools.
+Simple Strands Agent with search, weather, directions, local time, and currency tools.
 
 This agent demonstrates:
 - Multi-tool agent using Strands SDK
@@ -21,7 +21,9 @@ from strands.telemetry import StrandsTelemetry
 
 from tools import (
     duckduckgo_search,
+    get_current_time,
     get_directions,
+    get_exchange_rate,
     get_weather,
 )
 
@@ -101,12 +103,14 @@ def _setup_observability() -> TracerProvider:
 
 def _create_agent() -> Agent:
     """
-    Create and configure the Strands agent with all three tools.
+    Create and configure the Strands agent with all tools.
 
     Returns:
         Configured Agent instance
     """
-    logger.info("Creating Strands agent with search, weather, and directions tools")
+    logger.info(
+        "Creating Strands agent with search, weather, directions, time, and currency tools"
+    )
 
     tracer_provider = _setup_observability()
     telemetry = StrandsTelemetry(tracer_provider=tracer_provider)
@@ -126,7 +130,13 @@ def _create_agent() -> Agent:
     agent = Agent(
         system_prompt=system_prompt,
         model=model,
-        tools=[duckduckgo_search, get_weather, get_directions]
+        tools=[
+            duckduckgo_search,
+            get_weather,
+            get_directions,
+            get_current_time,
+            get_exchange_rate,
+        ]
     )
 
     logger.info("Agent created successfully")
@@ -151,10 +161,13 @@ def main() -> None:
     agent = _create_agent()
 
     print("\n" + "=" * 80)
-    print("Simple Agent with Search, Weather, and Directions")
+    print("Simple Agent: Search, Weather, Directions, Time, Currency")
     print("=" * 80 + "\n")
 
-    print("Ask me anything! I can search the web, check weather, and get directions.")
+    print(
+        "Ask me anything! I can search the web, check weather, get directions, "
+        "look up local times, and convert currencies."
+    )
     print("Type 'quit' to exit.\n")
 
     while True:

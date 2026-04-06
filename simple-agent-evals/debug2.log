@@ -1,0 +1,393 @@
+2026-04-06 13:30:24,968,p26214,{eval.py:867},INFO,Starting Simple Agent Evaluations
+2026-04-06 13:30:24,968,p26214,{eval.py:134},INFO,Loaded 5 test cases from dataset2.json
+2026-04-06 13:30:24,969,p26214,{eval.py:872},INFO,Loaded 5 test cases
+2026-04-06 13:30:24,997,p26214,{eval.py:920},INFO,Running Braintrust evaluation...
+Experiment main-1775496626 is running at https://www.braintrust.dev/app/Cindy%20Lyu/p/simple-agent-evals/experiments/main-1775496626
+2026-04-06 13:30:25,727,p26214,{eval.py:561},INFO,Running agent for test case: What is the current local time and date in London, UK?...
+2026-04-06 13:30:25,939,p26214,{agent.py:111},INFO,Creating Strands agent with search, weather, directions, time, and currency tools
+2026-04-06 13:30:25,939,p26214,{agent.py:84},INFO,Setting up Braintrust observability
+2026-04-06 13:30:25,939,p26214,{agent.py:100},INFO,Braintrust observability configured for project: project_name:simple-agent-evals
+2026-04-06 13:30:25,941,p26214,{agent.py:62},INFO,Loaded system prompt from /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/simple-agent-evals/prompts/system_prompt.txt (1060 chars)
+2026-04-06 13:30:25,946,p26214,{agent.py:142},INFO,Agent created successfully
+2026-04-06 13:30:25,946,p26214,{eval.py:154},INFO,Running agent on: What is the current local time and date in London, UK?...
+2026-04-06 13:30:25,946,p26214,{metrics.py:557},INFO,Creating Strands MetricsClient
+2026-04-06 13:30:26,996,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:27,120,p26214,{tools.py:361},INFO,[Tool] get_current_time: city='London'
+2026-04-06 13:30:27,121,p26214,{tools.py:374},INFO,[Tool] get_current_time: Europe/London -> 2026-04-06 18:30:27 (+01:00)
+2026-04-06 13:30:28,393,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/pydantic/main.py:464: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `ParsedTextBlock[TypeVar]` - serialized value may not be as expected [field_name='content', input_value=ParsedTextBlock(citations...xt', parsed_output=None), input_type=ParsedTextBlock])
+  PydanticSerializationUnexpectedValue(Expected `ThinkingBlock` - serialized value may not be as expected [field_name='content', input_value=ParsedTextBlock(citations...xt', parsed_output=None), input_type=ParsedTextBlock])
+  PydanticSerializationUnexpectedValue(Expected `RedactedThinkingBlock` - serialized value may not be as expected [field_name='content', input_value=ParsedTextBlock(citations...xt', parsed_output=None), input_type=ParsedTextBlock])
+  PydanticSerializationUnexpectedValue(Expected `ToolUseBlock` - serialized value may not be as expected [field_name='content', input_value=ParsedTextBlock(citations...xt', parsed_output=None), input_type=ParsedTextBlock])
+  PydanticSerializationUnexpectedValue(Expected `ServerToolUseBlock` - serialized value may not be as expected [field_name='content', input_value=ParsedTextBlock(citations...xt', parsed_output=None), input_type=ParsedTextBlock])
+  PydanticSerializationUnexpectedValue(Expected `WebSearchToolResultBlock` - serialized value may not be as expected [field_name='content', input_value=ParsedTextBlock(citations...xt', parsed_output=None), input_type=ParsedTextBlock])
+  return self.__pydantic_serializer__.to_python(
+2026-04-06 13:30:29,279,p26214,{eval.py:165},INFO,Agent responded in 3.3s, tools used: ['get_current_time']
+2026-04-06 13:30:29,280,p26214,{eval.py:561},INFO,Running agent for test case: What time is it right now in Tokyo?...
+2026-04-06 13:30:29,280,p26214,{agent.py:111},INFO,Creating Strands agent with search, weather, directions, time, and currency tools
+2026-04-06 13:30:29,280,p26214,{agent.py:84},INFO,Setting up Braintrust observability
+2026-04-06 13:30:29,282,p26214,{__init__.py:567},WARNING,Overriding of current TracerProvider is not allowed
+2026-04-06 13:30:29,282,p26214,{agent.py:100},INFO,Braintrust observability configured for project: project_name:simple-agent-evals
+2026-04-06 13:30:29,285,p26214,{agent.py:62},INFO,Loaded system prompt from /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/simple-agent-evals/prompts/system_prompt.txt (1060 chars)
+2026-04-06 13:30:29,300,p26214,{agent.py:142},INFO,Agent created successfully
+2026-04-06 13:30:29,300,p26214,{eval.py:154},INFO,Running agent on: What time is it right now in Tokyo?...
+2026-04-06 13:30:30,136,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:30,256,p26214,{tools.py:361},INFO,[Tool] get_current_time: city='Tokyo'
+2026-04-06 13:30:30,258,p26214,{tools.py:374},INFO,[Tool] get_current_time: Asia/Tokyo -> 2026-04-07 02:30:30 (+09:00)
+2026-04-06 13:30:31,169,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:32,005,p26214,{eval.py:165},INFO,Agent responded in 2.7s, tools used: ['get_current_time']
+2026-04-06 13:30:32,005,p26214,{eval.py:561},INFO,Running agent for test case: Convert 50 US dollars to Japanese yen using the current exch...
+2026-04-06 13:30:32,006,p26214,{agent.py:111},INFO,Creating Strands agent with search, weather, directions, time, and currency tools
+2026-04-06 13:30:32,006,p26214,{agent.py:84},INFO,Setting up Braintrust observability
+2026-04-06 13:30:32,007,p26214,{__init__.py:567},WARNING,Overriding of current TracerProvider is not allowed
+2026-04-06 13:30:32,007,p26214,{agent.py:100},INFO,Braintrust observability configured for project: project_name:simple-agent-evals
+2026-04-06 13:30:32,009,p26214,{agent.py:62},INFO,Loaded system prompt from /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/simple-agent-evals/prompts/system_prompt.txt (1060 chars)
+2026-04-06 13:30:32,023,p26214,{agent.py:142},INFO,Agent created successfully
+2026-04-06 13:30:32,023,p26214,{eval.py:154},INFO,Running agent on: Convert 50 US dollars to Japanese yen using the current exchange rate....
+2026-04-06 13:30:32,874,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:32,891,p26214,{tools.py:411},INFO,[Tool] get_exchange_rate: 50.0 USD -> JPY
+2026-04-06 13:30:33,189,p26214,{tools.py:436},INFO,[Tool] get_exchange_rate: 1 USD = 159.6 JPY; 50.0 USD -> 7980.0
+2026-04-06 13:30:34,921,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:35,639,p26214,{eval.py:165},INFO,Agent responded in 3.6s, tools used: ['get_exchange_rate']
+2026-04-06 13:30:35,640,p26214,{eval.py:561},INFO,Running agent for test case: How many euros would I receive for 200 British pounds at tod...
+2026-04-06 13:30:35,640,p26214,{agent.py:111},INFO,Creating Strands agent with search, weather, directions, time, and currency tools
+2026-04-06 13:30:35,640,p26214,{agent.py:84},INFO,Setting up Braintrust observability
+2026-04-06 13:30:35,641,p26214,{__init__.py:567},WARNING,Overriding of current TracerProvider is not allowed
+2026-04-06 13:30:35,641,p26214,{agent.py:100},INFO,Braintrust observability configured for project: project_name:simple-agent-evals
+2026-04-06 13:30:35,648,p26214,{agent.py:62},INFO,Loaded system prompt from /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/simple-agent-evals/prompts/system_prompt.txt (1060 chars)
+2026-04-06 13:30:35,667,p26214,{agent.py:142},INFO,Agent created successfully
+2026-04-06 13:30:35,667,p26214,{eval.py:154},INFO,Running agent on: How many euros would I receive for 200 British pounds at today's exchange rate?...
+2026-04-06 13:30:36,466,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:36,570,p26214,{tools.py:411},INFO,[Tool] get_exchange_rate: 200.0 GBP -> EUR
+2026-04-06 13:30:36,940,p26214,{tools.py:436},INFO,[Tool] get_exchange_rate: 1 GBP = 1.1461 EUR; 200.0 GBP -> 229.21999999999997
+2026-04-06 13:30:37,905,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:38,867,p26214,{eval.py:165},INFO,Agent responded in 3.2s, tools used: ['get_exchange_rate']
+2026-04-06 13:30:38,868,p26214,{eval.py:561},INFO,Running agent for test case: I am planning a business trip from New York to Tokyo. How lo...
+2026-04-06 13:30:38,868,p26214,{agent.py:111},INFO,Creating Strands agent with search, weather, directions, time, and currency tools
+2026-04-06 13:30:38,868,p26214,{agent.py:84},INFO,Setting up Braintrust observability
+2026-04-06 13:30:38,869,p26214,{__init__.py:567},WARNING,Overriding of current TracerProvider is not allowed
+2026-04-06 13:30:38,869,p26214,{agent.py:100},INFO,Braintrust observability configured for project: project_name:simple-agent-evals
+2026-04-06 13:30:38,873,p26214,{agent.py:62},INFO,Loaded system prompt from /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/simple-agent-evals/prompts/system_prompt.txt (1060 chars)
+2026-04-06 13:30:38,888,p26214,{agent.py:142},INFO,Agent created successfully
+2026-04-06 13:30:38,888,p26214,{eval.py:154},INFO,Running agent on: I am planning a business trip from New York to Tokyo. How long is the flight rou...
+2026-04-06 13:30:39,567,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:40,758,p26214,{tools.py:291},INFO,[Tool] get_directions: 'New York' -> 'JFK Airport'
+2026-04-06 13:30:40,760,p26214,{tools.py:361},INFO,[Tool] get_current_time: city='Tokyo'
+2026-04-06 13:30:40,760,p26214,{tools.py:91},INFO,[Tool] Geocoding location: New York
+2026-04-06 13:30:40,760,p26214,{tools.py:374},INFO,[Tool] get_current_time: Asia/Tokyo -> 2026-04-07 02:30:40 (+09:00)
+2026-04-06 13:30:40,761,p26214,{tools.py:237},INFO,[Tool] get_weather: location='Tokyo'
+2026-04-06 13:30:40,762,p26214,{tools.py:411},INFO,[Tool] get_exchange_rate: 1.0 USD -> JPY
+2026-04-06 13:30:40,763,p26214,{tools.py:91},INFO,[Tool] Geocoding location: Tokyo
+2026-04-06 13:30:40,763,p26214,{tools.py:209},INFO,[Tool] duckduckgo_search: query='top business hotels Shinjuku Tokyo', max_results=5
+2026-04-06 13:30:41,131,p26214,{tools.py:110},INFO,[Tool] Geocoded 'New York' to: New York, United States
+2026-04-06 13:30:41,361,p26214,{lib.rs:404},INFO,response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=top%20business%20hotels%20Shinjuku%20Tokyo 200
+2026-04-06 13:30:41,403,p26214,{lib.rs:404},INFO,response: https://grokipedia.com/api/typeahead?query=top+business+hotels+Shinjuku+Tokyo&limit=1 200
+2026-04-06 13:30:41,500,p26214,{tools.py:110},INFO,[Tool] Geocoded 'Tokyo' to: 東京都, 日本
+2026-04-06 13:30:41,830,p26214,{tools.py:436},INFO,[Tool] get_exchange_rate: 1 USD = 159.6 JPY; 1.0 USD -> 159.6
+2026-04-06 13:30:42,071,p26214,{tools.py:266},INFO,[Tool] get_weather: Tokyo -> 59.8F
+2026-04-06 13:30:42,138,p26214,{tools.py:91},INFO,[Tool] Geocoding location: JFK Airport
+2026-04-06 13:30:42,450,p26214,{tools.py:110},INFO,[Tool] Geocoded 'JFK Airport' to: John F. Kennedy International Airport, JFK Access Road, Queens, Queens County, New York, 11430, United States
+2026-04-06 13:30:42,857,p26214,{lib.rs:404},INFO,response: https://www.mojeek.com/search?q=top+business+hotels+Shinjuku+Tokyo 200
+2026-04-06 13:30:42,962,p26214,{tools.py:214},INFO,[Tool] duckduckgo_search: found 5 results
+2026-04-06 13:30:52,767,p26214,{tools.py:344},ERROR,[Tool] get_directions failed: HTTPSConnectionPool(host='router.project-osrm.org', port=443): Read timed out. (read timeout=10)
+2026-04-06 13:30:53,620,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-06 13:30:58,637,p26214,{eval.py:165},INFO,Agent responded in 19.7s, tools used: ['get_directions', 'get_current_time', 'get_weather', 'get_exchange_rate', 'duckduckgo_search']
+
+Tool #1: get_current_time
+The current local time and date in London, UK is:
+
+- **Date:** April 6, 2026
+- **Time:** 18:30:27 (6:30 PM)
+- **Timezone:** BST (British Summer Time)
+- **UTC Offset:** +01:00
+
+London is currently observing British Summer Time, which is one hour ahead of UTC.
+Tool #1: get_current_time
+The current time in Tokyo is **02:30:30 (2:30 AM)** on **April 7, 2026**.
+
+Tokyo is in the **JST** (Japan Standard Time) timezone, which is **UTC+9:00**.
+Tool #1: get_exchange_rate
+Based on the current exchange rate, **50 USD = 7,980 JPY** (Japanese yen).
+
+The current exchange rate is **1 USD = 159.6 JPY** (as of April 2, 2026).
+Tool #1: get_exchange_rate
+At today's exchange rate (April 2, 2026), you would receive **€229.22** for £200.
+
+The current GBP/EUR exchange rate is **1.1461**, meaning 1 British pound equals approximately 1.1461 euros.I'll help you plan your business trip to Tokyo. Let me gather this information for you.
+Tool #1: get_directions
+
+Tool #2: get_current_time
+
+Tool #3: get_weather
+
+Tool #4: get_exchange_rate
+
+Tool #5: duckduckgo_search
+Great! I've gathered most of your information. Here's what I found:
+
+## **Current Time in Tokyo**
+It's currently **02:30 AM (2:30 AM) on April 7, 2026** in Tokyo (JST - Japan Standard Time, UTC+09:00)
+
+## **Weather in Tokyo**
+- **Temperature:** 59.8°F (approximately 15.4°C)
+- **Wind Speed:** 5.7 mph (gentle breeze)
+- **Conditions:** Cloudy/Overcast
+
+## **USD to JPY Exchange Rate**
+- **1 USD = 159.6 JPY** (as of April 2, 2026)
+- This means $100 USD would equal approximately 15,960 JPY
+
+## **Driving to JFK**
+Unfortunately, I encountered a technical issue retrieving the exact driving distance and time to JFK Airport from New York. However, generally speaking:
+- **From Manhattan to JFK:** approximately 15-25 miles depending on your starting point
+- **Typical drive time:** 45 minutes to 1.5+ hours depending on traffic (rush hour can be much longer)
+
+## **Top Business Hotels in Shinjuku**
+Based on my search, here are some notable options:
+
+1. **Tokyo Business Hotel** (Shinjuku) - TripAdvisor reviews highlight it as a good option that puts Shinjuku at your fingertips
+2. **Shinjuku Business Hotel** - Budget-friendly option with positive reviews
+3. **Hotels near Shinjuku Station** - The area around Shinjuku Station (the world's busiest train station) has numerous highly-rated business hotels
+
+For more detailed information on luxury business hotels in Shinjuku, I'd recommend checking TripAdvisor or Booking.com directly, as they'll have current rates, amenities, and availability for your specific travel dates.
+
+**Pro tip:** Since it will be very early morning in Tokyo when you arrive, consider your jet lag adjustment and hotel check-in policies!simple-agent-evals (data): 0it [00:00, ?it/s]simple-agent-evals (data): 5it [00:00, 8619.61it/s]
+simple-agent-evals (tasks):   0%|          | 0/5 [00:00<?, ?it/s]2026-04-06 13:30:58,659,p26214,{base_events.py:1819},ERROR,Task exception was never retrieved
+future: <Task finished name='Task-66' coro=<AsyncClient.aclose() done, defined at /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 241, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 1210, in close
+    super().close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 875, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 793, in call_soon
+    self._check_closed()
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 540, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2026-04-06 13:30:58,669,p26214,{base_events.py:1819},ERROR,Task exception was never retrieved
+future: <Task finished name='Task-67' coro=<AsyncClient.aclose() done, defined at /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 241, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 1210, in close
+    super().close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 875, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 793, in call_soon
+    self._check_closed()
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 540, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2026-04-06 13:30:58,670,p26214,{base_events.py:1819},ERROR,Task exception was never retrieved
+future: <Task finished name='Task-68' coro=<AsyncClient.aclose() done, defined at /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 241, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 1210, in close
+    super().close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 875, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 793, in call_soon
+    self._check_closed()
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 540, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2026-04-06 13:30:58,671,p26214,{base_events.py:1819},ERROR,Task exception was never retrieved
+future: <Task finished name='Task-69' coro=<AsyncClient.aclose() done, defined at /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 241, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 1210, in close
+    super().close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 875, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 793, in call_soon
+    self._check_closed()
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 540, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2026-04-06 13:30:58,838,p26214,{base_events.py:1819},ERROR,Task exception was never retrieved
+future: <Task finished name='Task-77' coro=<AsyncClient.aclose() done, defined at /Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 241, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/lyukexin/Desktop/DSAN6725/spring-2026-lab10-CindyLyu1953-1/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1329, in aclose
+    self._transport.close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 1210, in close
+    super().close()
+  File "/opt/anaconda3/lib/python3.12/asyncio/selector_events.py", line 875, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 793, in call_soon
+    self._check_closed()
+  File "/opt/anaconda3/lib/python3.12/asyncio/base_events.py", line 540, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2026-04-06 13:31:07,236,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-06 13:31:08,460,p26214,{_client.py:1025},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+simple-agent-evals (tasks):  20%|██        | 1/5 [00:09<00:39,  9.83s/it]2026-04-06 13:31:18,875,p26214,{_client.py:1025},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-06 13:31:25,841,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+simple-agent-evals (tasks):  40%|████      | 2/5 [00:27<00:42, 14.28s/it]2026-04-06 13:31:33,944,p26214,{_client.py:1025},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-06 13:31:41,664,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+simple-agent-evals (tasks):  60%|██████    | 3/5 [00:43<00:29, 14.98s/it]2026-04-06 13:31:49,710,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-06 13:31:51,774,p26214,{_client.py:1025},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+simple-agent-evals (tasks):  80%|████████  | 4/5 [00:53<00:13, 13.06s/it]2026-04-06 13:32:00,366,p26214,{_client.py:1025},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-06 13:32:04,828,p26214,{_client.py:1740},INFO,HTTP Request: POST https://api.anthropic.com/v1/chat/completions "HTTP/1.1 200 OK"
+simple-agent-evals (tasks): 100%|██████████| 5/5 [01:06<00:00, 13.05s/it]simple-agent-evals (tasks): 100%|██████████| 5/5 [01:06<00:00, 13.24s/it]
+2026-04-06 13:32:08,733,p26214,{eval.py:694},INFO,Eval summary: 5 cases, 0 errors, scorers: ClosedQA=40.00%, Factuality=56.00%, Latency=95.00%, NoError=100.00%, ResponseCompleteness=100.00%, ScopeAwareness=80.00%, ToolSelection=100.00%
+2026-04-06 13:32:08,735,p26214,{eval.py:804},INFO,Evaluation metrics exported to eval_metrics2.json
+2026-04-06 13:32:08,735,p26214,{eval.py:935},INFO,Evaluation completed in 1 minutes and 43.8 seconds
+
+=========================SUMMARY=========================
+main-1775496626 compared to main-1775488020:
+40.00% 'ClosedQA'             score
+56.00% 'Factuality'           score
+95.00% 'Latency'              score
+100.00% 'NoError'              score
+100.00% 'ResponseCompleteness' score
+80.00% 'ScopeAwareness'       score
+100.00% 'ToolSelection'        score
+
+2 llm_calls
+0 tool_calls
+0 errors
+0 llm_errors
+0 tool_errors
+0tok prompt_tokens
+0tok prompt_cached_tokens
+0tok prompt_cache_creation_tokens
+0tok completion_tokens
+0tok completion_reasoning_tokens
+0tok total_tokens
+0.01s duration
+
+See results for main-1775496626 at https://www.braintrust.dev/app/Cindy%20Lyu/p/simple-agent-evals/experiments/main-1775496626
+
+================================================================================
+EVALUATION SUMMARY
+================================================================================
+Total test cases: 5
+Errors: 0
+
+--------------------------------------------------------------------------------
+Scorer                          Avg Score      Min      Max    Count
+--------------------------------------------------------------------------------
+ClosedQA                           40.00%     0.00     1.00        5
+Factuality                         56.00%     0.40     0.60        5
+Latency                            95.00%     0.75     1.00        5
+NoError                           100.00%     1.00     1.00        5
+ResponseCompleteness              100.00%     1.00     1.00        1
+ScopeAwareness                     80.00%     0.00     1.00        5
+ToolSelection                     100.00%     1.00     1.00        5
+
+--------------------------------------------------------------------------------
+PER-CATEGORY BREAKDOWN
+--------------------------------------------------------------------------------
+
+  [currency]
+    ClosedQA                       50.00%  (2 cases)
+    Factuality                     60.00%  (2 cases)
+    Latency                       100.00%  (2 cases)
+    NoError                       100.00%  (2 cases)
+    ScopeAwareness                100.00%  (2 cases)
+    ToolSelection                 100.00%  (2 cases)
+
+  [multi_tool]
+    ClosedQA                        0.00%  (1 cases)
+    Factuality                     40.00%  (1 cases)
+    Latency                        75.00%  (1 cases)
+    NoError                       100.00%  (1 cases)
+    ResponseCompleteness          100.00%  (1 cases)
+    ScopeAwareness                  0.00%  (1 cases)
+    ToolSelection                 100.00%  (1 cases)
+
+  [timezone]
+    ClosedQA                       50.00%  (2 cases)
+    Factuality                     60.00%  (2 cases)
+    Latency                       100.00%  (2 cases)
+    NoError                       100.00%  (2 cases)
+    ScopeAwareness                100.00%  (2 cases)
+    ToolSelection                 100.00%  (2 cases)
+
+================================================================================
+

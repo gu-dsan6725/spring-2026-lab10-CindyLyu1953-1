@@ -38,7 +38,7 @@ Thumbs.db
 .scratchpad/
 logs/
 output/
-*.log
+# *.log
 
 # AWS
 .aws/

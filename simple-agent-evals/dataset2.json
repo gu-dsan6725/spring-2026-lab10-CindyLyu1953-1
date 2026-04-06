@@ -1,0 +1,37 @@
+[
+    {
+        "input": "What is the current local time and date in London, UK?",
+        "expected_output": "The current local time in London with timezone name, UTC offset, and a clear date/time string.",
+        "expected_tools": ["get_current_time"],
+        "category": "timezone",
+        "difficulty": "easy"
+    },
+    {
+        "input": "What time is it right now in Tokyo?",
+        "expected_output": "The current local time in Tokyo with IANA or regional timezone information and UTC offset.",
+        "expected_tools": ["get_current_time"],
+        "category": "timezone",
+        "difficulty": "easy"
+    },
+    {
+        "input": "Convert 50 US dollars to Japanese yen using the current exchange rate.",
+        "expected_output": "The USD to JPY rate from a live lookup and the yen amount for 50 USD.",
+        "expected_tools": ["get_exchange_rate"],
+        "category": "currency",
+        "difficulty": "easy"
+    },
+    {
+        "input": "How many euros would I receive for 200 British pounds at today's exchange rate?",
+        "expected_output": "The GBP to EUR rate and the equivalent euros for 200 GBP.",
+        "expected_tools": ["get_exchange_rate"],
+        "category": "currency",
+        "difficulty": "easy"
+    },
+    {
+        "input": "I am planning a business trip from New York to Tokyo. How long is the flight route by driving to JFK first, what is the current time in Tokyo, what is the weather there, what is the USD to JPY exchange rate, and what are the top business hotels in Shinjuku?",
+        "expected_output": "Driving directions from Manhattan to JFK Airport with distance and time, the current local time in Tokyo with timezone info, current Tokyo weather with temperature, the USD to JPY exchange rate, and a list of recommended business hotels in the Shinjuku area of Tokyo.",
+        "expected_tools": ["get_directions", "get_current_time", "get_weather", "get_exchange_rate", "duckduckgo_search"],
+        "category": "multi_tool",
+        "difficulty": "hard"
+    }
+]
